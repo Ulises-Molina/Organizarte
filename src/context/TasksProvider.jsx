@@ -11,11 +11,26 @@ export const TasksProvider = ({children}) => {
         check: false,
         category: "Todas las categorias"
     });
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState(()=>{
+        const localTasks = localStorage.getItem("tasks");
+        return localTasks ? JSON.parse(localTasks) : [];
+    });
     const [error, setError] = useState(false);
-    const [categories, setCategories] = useState(["Todas las categorias","Trabajo","Estudio","Casa","Deporte"]);
+    const [categories, setCategories] = useState(()=>{
+        const localCategories = localStorage.getItem("categories");
+        return localCategories ? JSON.parse(localCategories) : ["Todas las categorias","Trabajo","Estudio","Casa","Deporte"];
+    });
     const [filter, setFilter] = useState("Todas las categorias");
     const [filterTasks, setFilterTasks] = useState(tasks);
+
+
+    useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    },[tasks]);
+
+    useEffect(() => {
+        localStorage.setItem("categories", JSON.stringify(categories));
+    },[categories]);
 
     useEffect(() => {
         if(filter === "Todas las categorias"){
