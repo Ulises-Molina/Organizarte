@@ -7,7 +7,7 @@ export const TasksProvider = ({children}) => {
 
     const [task, setTask] = useState({
         name: "",
-        priority: "Normal",
+        priority: "Media",
         check: false,
         category: "Todas las categorias"
     });
@@ -38,6 +38,7 @@ export const TasksProvider = ({children}) => {
         }else{
             setFilterTasks(tasks.filter(task => task.category === filter));
         }
+        console.log(tasks)
     },[filter,tasks]);
 
     const handleChange = (e) => {
@@ -64,7 +65,7 @@ export const TasksProvider = ({children}) => {
             setTasks([...tasks, {...task, id: uuidv4()}]);
             setTask((prevState) => ({
                 name: "",
-                priority: "Normal",
+                priority: "Media",
                 check: false,
                 category: prevState.category,
             }));
@@ -100,7 +101,7 @@ export const TasksProvider = ({children}) => {
 
 
 return (
-    <TasksContext.Provider value={{task, error, change: handleChange, changePrioryty: handleChangePrioryty, add: addTask, tasks, deleteTask, changeCategory,categories,setCategories,setFilterCategory,filterTasks}}>
+    <TasksContext.Provider value={{task, error, change: handleChange, changePrioryty: handleChangePrioryty, add: addTask, tasks,setTasks, deleteTask, changeCategory,categories,setCategories,setFilterCategory,filterTasks,setFilterTasks}}>
         {children}
     </TasksContext.Provider>
 )

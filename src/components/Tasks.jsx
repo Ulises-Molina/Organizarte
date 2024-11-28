@@ -1,12 +1,25 @@
 import { DeleteOutlineOutlined } from "@mui/icons-material"
+import { useState } from "react";
+import { useContext } from "react";
+import { TasksContext } from "../context/TasksContext";
 
 
+export const Tasks = ({nombre,prioridad,deleteTask,id,key}) => {
 
-export const Tasks = ({nombre,prioridad,deleteTask,key}) => {
+
+    const {tasks,setTasks} = useContext(TasksContext);
+    const [isChecked, setIsChecked] = useState(false)
+
+
+    const handleCheckboxChange = (event) => {
+        setIsChecked(event.target.checked);
+        setTasks(tasks.map(task => task.id === id ? {...task, check: isChecked} : task));
+    };
+
 
     const prioridadClases = {
         Alta: "bg-red-100",
-        Normal: "bg-blue-100",
+        Media: "bg-blue-100",
         Baja: "bg-green-100"
     };
 
@@ -15,9 +28,9 @@ export const Tasks = ({nombre,prioridad,deleteTask,key}) => {
         <>
         <main>
             <div className="flex flex-row gap-5 font-light my-2 items-center">
-                <input type="checkbox" className="my-2"/>
+                <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} className="mt-1 hover:cursor-pointer"/>
                 <div className="max-w-32 sm:max-w-3xl break-words">
-                <p className="">{nombre}</p>
+                { isChecked ? <p className="line-through">{nombre}</p> : <p>{nombre}</p>}
                 </div>
                 <span className={`px-5 rounded-xl max-h-max ${prioridadClases[prioridad]}`}>{prioridad}</span>
                 <DeleteOutlineOutlined className="cursor-pointer opacity-80" onClick={() => deleteTask(key)}/>

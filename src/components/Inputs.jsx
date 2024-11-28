@@ -11,7 +11,7 @@ export const Inputs = () =>  {
             <div className="flex relative">
                 <label className="font-light absolute -top-7">Prioridad de tarea</label>
                 <select onChange={(e) => changePrioryty(e)} value={task.priority} className="bg-sidebar rounded p-1 font-light min-w-48">
-                    <option value="Normal" className="font-light">Normal</option>
+                    <option value="Media" className="font-light">Media</option>
                     <option value="Alta" className="font-light">Alta</option>
                     <option value="Baja" className="font-light">Baja</option>
                 </select>

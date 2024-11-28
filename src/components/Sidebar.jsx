@@ -39,7 +39,7 @@ export const Sidebar = ({addCategory,delCategory,unShow,unShowDel}) => {
         <p className="text-center opacity-50 mt-5 hover:cursor-pointer hover:opacity-70" 
         onClick={
             addCategory 
-        }
+        } 
         >Agregar categoria</p>
         <p className="text-center opacity-50 mt-5 mb-5 hover:cursor-pointer hover:opacity-70" onClick={delCategory}>Eliminar Categoria</p>
     </aside>
@@ -47,4 +47,3 @@ export const Sidebar = ({addCategory,delCategory,unShow,unShowDel}) => {
 }
 
 
-//TODO : GUARDAR EN CACHE LOS DATOS DE LAS CATEGORIAS Y TAREAS

@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { TasksContext } from "../context/TasksContext";
 import { FormNewCategory } from "../components/FormNewCategory";
 import { FormDelCategory } from "../components/FormDelCategory";
+import { InputSearch } from "../components/InputSearch";
 
 
 export const Home = () => {
@@ -13,6 +14,7 @@ export const Home = () => {
     const {deleteTask,filterTasks} = useContext(TasksContext);
     const [formNewCategory, setFormNewCategory] = useState(false);
     const [formDelCategory, setFormDelCategory] = useState(false);
+    const [search, setSearch] = useState('');
 
 
     const openMenu = () => {
@@ -57,6 +59,14 @@ export const Home = () => {
         setFormNewCategory(false);
     }
 
+    const priorityOrder = {
+        Alta: 1,
+        Media: 2,
+        Baja: 3
+    }
+
+    const tasks = filterTasks.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]).filter(task => task.name.toLowerCase().includes(search.toLowerCase()))
+
     return (
         <>
         <Header openMenu={openMenu}></Header>
@@ -68,10 +78,12 @@ export const Home = () => {
         formDelCategory ?
         <FormDelCategory unShow={unshowFormDel} show={showFormDel}></FormDelCategory> :
         <>
+        <InputSearch search={setSearch}/>
         <Inputs/>
             {
-                filterTasks.map((task) => (
-                    <Tasks key={task.id} nombre={task.name} prioridad={task.priority} deleteTask={()=> deleteTask(task.id)}/>
+                tasks.map((task) => (
+                    <Tasks key={task.id} id={task.id} nombre={task.name} prioridad={task.priority} deleteTask={()=> deleteTask(task.id)}/>
+                    
                 ))
             }
         </>
