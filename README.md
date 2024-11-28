@@ -1,6 +1,11 @@
 
 # Organizarte
-Web gestion de tareas filtrado por categorias y prioridad
+##Web sistema de gestion de tareas.
+
+Cuenta con un menu para filtrar tareas por categoria, con posibilidad de añadir categorias personalizadas o eliminarlas.
+Las tareas cuentan con prioridad que las organiza de por importancia en la lista
+Input buscandor de tareas que filtra por nombre en caso de que se quiera mostrar tareas en particular
+
 =======
 # React + Vite
 
