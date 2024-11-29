@@ -1,6 +1,5 @@
 import { DeleteOutlineOutlined } from "@mui/icons-material"
-import { useState } from "react";
-import { useContext } from "react";
+import { useContext, useState,useEffect} from "react";
 import { TasksContext } from "../context/TasksContext";
 
 
@@ -8,8 +7,15 @@ export const Tasks = ({nombre,prioridad,deleteTask,id,key}) => {
 
 
     const {tasks,setTasks} = useContext(TasksContext);
-    const [isChecked, setIsChecked] = useState(false)
 
+    const [isChecked, setIsChecked] = useState(() => {
+        const storedValue = localStorage.getItem(`isChecked-${id}`);
+        return storedValue ? JSON.parse(storedValue) : false;
+    });
+
+    useEffect(() => {
+        localStorage.setItem(`isChecked-${id}`, JSON.stringify(isChecked));
+    }, [isChecked, id]);
 
     const handleCheckboxChange = (event) => {
         setIsChecked(event.target.checked);
