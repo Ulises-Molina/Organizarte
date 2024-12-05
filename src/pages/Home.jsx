@@ -81,8 +81,8 @@ export const Home = () => {
         <InputSearch search={setSearch}/>
         <Inputs/>
             {
-                tasks.map((task) => (
-                    <Tasks key={task.id} id={task.id} nombre={task.name} prioridad={task.priority} deleteTask={()=> deleteTask(task.id)}/>
+                tasks.map((task, index) => (
+                    <Tasks key={task.id} index={index} id={task.id} nombre={task.name} prioridad={task.priority} deleteTask={()=> deleteTask(task.id)}/>
                     
                 ))
             }
